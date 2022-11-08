@@ -1,0 +1,19 @@
+<div
+  id="<%= dom_id(give_feedback, :modal) %>"
+  class="fixed z-10 inset-0 overflow-y-auto hidden"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+  data-controller="modal">
+  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" data-action="click->modal#toggle"></div>
+    <div class="inline-block bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all w-full sm:my-8 align-middle sm:max-w-lg sm:p-6">
+      <div class="flex justify-end">
+        <button data-action="modal#toggle">
+          <%= render "shared/svg/close", classes: "h-5 w-5" %>
+        </button>
+      </div>
+      <%= render "give_form", give_feedback: give_feedback, user_id: user_id %>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,13 @@
   </head>
 
   <body>
-    <%= yield %>
+       <% if current_user %>
+      <%= render "shared/navbar" %>
+      <%= yield %>
+    <% else %>
+      <div class="flex justify-center pt-8">
+        <%= button_to("Sign in", "/auth/google_oauth2", class: "btn-primary btn-xl", method: :post, data: {turbo: false}) %>
+      </div>
+    <% end %>
   </body>
 </html>

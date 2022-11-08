@@ -1,0 +1,12 @@
+<tr data-controller="modal">
+  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%=link_to user.name, user_path(user) %></td>
+  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= user.email %></td>
+  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">
+    <%= link_to_modal "Give Feedback", dom_id(GiveFeedback.new, :modal), class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+    <%= link_to_modal "Request Feedback", dom_id(RequestFeedback.new, :modal), class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+    <%= link_to_modal "Both", "modal_both_feedback", class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+  </td>
+  <%= render "both_feedback_modal", request_feedback: RequestFeedback.new, user_id: user.id %>
+  <%= render "request_feedback_modal", request_feedback: RequestFeedback.new, user_id: user.id %>
+  <%= render "give_feedback_modal", give_feedback: GiveFeedback.new, user_id: user.id %>
+</tr>
