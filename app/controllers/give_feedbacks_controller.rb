@@ -1,11 +1,13 @@
 class GiveFeedbacksController < ApplicationController
+  before_action :fetch_feedback_offer, only: [:accept, :decline]
+
   def create
     give_feedback = current_user.give_feedbacks.new(give_feedback_params)
-binding.remote_pry
+
     if give_feedback.save
-      # binding.remote_pry
       # redirect_to(root_path, notice: "Request has been sent")
-      redirect_to root_path
+      # redirect_to root_path
+      redirect_to "/"
     else
       flash[:alert] = give_feedback.errors.full_messages.to_sentence
       redirect_back fallback_location: root_path
@@ -13,11 +15,13 @@ binding.remote_pry
   end
 
   def accept
-    fetch_give_feedback.update(status: :accepted)
+    @feedback_offer.update(status: :accepted)
+    redirect_back fallback_location: root_path
   end
 
   def decline
-    fetch_give_feedback.update(status: :declined)
+    @feedback_offer.update(status: :declined)
+    redirect_back fallback_location: root_path
   end
 
   private
@@ -26,7 +30,8 @@ binding.remote_pry
     params.require(:give_feedback).permit(:feedback_type, :recipient)
   end
 
-  def fetch_give_feedback
-    current_user.give_feedbacks.find(params[:id])
+  def fetch_feedback_offer
+    # catch error + alert z ridrectem
+    @feedback_offer = current_user.give_feedbacks.find(params[:id])
   end
 end

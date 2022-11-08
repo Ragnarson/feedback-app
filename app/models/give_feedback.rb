@@ -1,4 +1,5 @@
 class GiveFeedback < ApplicationRecord
+  # TODO: change name to FeedbackOffer
   belongs_to :user
 
   AVAILABLE_TYPES = ["Note", "Group meeting", "1-on-1"].freeze

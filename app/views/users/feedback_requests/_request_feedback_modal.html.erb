@@ -1,5 +1,5 @@
 <div
-  id="<%= dom_id(give_feedback, :modal) %>"
+  id="<%= dom_id(user, :request_modal) %>"
   class="fixed z-10 inset-0 overflow-y-auto hidden"
   aria-labelledby="modal-title"
   role="dialog"
@@ -13,7 +13,7 @@
           <%= render "shared/svg/close", classes: "h-5 w-5" %>
         </button>
       </div>
-      <%= render "give_form", give_feedback: give_feedback, user_id: user_id %>
+      <%= render "users/feedback_requests/form", request_feedback: RequestFeedback.new, user: user %>
     </div>
   </div>
 </div>

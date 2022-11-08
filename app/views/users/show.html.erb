@@ -1,3 +1,3 @@
 <%# <%binding.remote_pry%> %>
-<%= render "request_feedback_list", request_feedbacks: request_feedbacks %>
-<%= render "give_feedback_list", give_feedbacks: give_feedbacks %>
+<%# <%= render "request_feedback_list", request_feedbacks: request_feedbacks %> %>
+<%= render "users/feedback_offers/recievied_feedback_offers", feedback_offers: @user.recieved_offers %>

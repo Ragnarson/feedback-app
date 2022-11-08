@@ -1,6 +1,6 @@
-<%= simple_form_for request_feedback, defaults: {wrapper_html: {class: "mb-4"}}  do |f| %>
+<%= simple_form_for RequestFeedback.new, remote:false, defaults: {wrapper_html: {class: "mb-4"}}  do |f| %>
 <label class="date required mb-0 text-gray-800 leading-5 font-medium">Select type of Request Feedback</label>
 <%= f.input :feedback_type, collection: RequestFeedback.feedback_types, prompt: "Select type" %>
-<%= f.hidden_field :recipient, value: user_id %>
+<%= f.hidden_field :recipient, value: user.id %>
 <%= f.button :submit, "Request Feedback",  class: "inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
 <% end %>

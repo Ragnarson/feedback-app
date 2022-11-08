@@ -24,12 +24,24 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
-              <% give_feedbacks&.each do |feedback| %>
+              <% feedback_offers&.each do |feedback| %>
                 <tr>
-                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= User.find_by(id: feedback.recipient).name %></td>
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= feedback.user.name %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= feedback.feedback_type %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= feedback.status %></td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= link_to "Accept", accept_give_feedback_path(feedback), class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2", data: { "turbo-method": :patch } %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <%= link_to "Accept",
+                      accept_give_feedback_path(feedback),
+                      class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
+                      data: {"turbo": true, "turbo-method": :patch }
+                    %>
+
+                    <%= link_to "Decline",
+                      decline_give_feedback_path(feedback),
+                      class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
+                      data: {"turbo": true, "turbo-method": :patch }
+                    %>
+                  </td>
                 </tr>
               <%end%>
 

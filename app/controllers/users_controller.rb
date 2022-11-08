@@ -1,21 +1,13 @@
 class UsersController < ApplicationController
+  before_action :fetch_user, only: [:show]
+
   def show
-    
-    render(
-      locals: {
-        user: current_user,
-        request_feedbacks: @user&.request_feedbacks,
-        # give_feedbacks:  GiveFeedback.where(recipient: @user.id),
-        give_feedbacks:  @user&.give_feedbacks,
-      }
-    )
-    # binding.remote_pry
   end
   
   def index
     render(
       locals: {
-        users: User.all
+        users: User.where.not(id: current_user.id).all
       }
     )
   end
