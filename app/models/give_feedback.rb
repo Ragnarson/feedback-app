@@ -1,5 +1,4 @@
 class GiveFeedback < ApplicationRecord
-  # TODO: change name to FeedbackOffer
   belongs_to :user
 
   validates :feedback_type, presence: true

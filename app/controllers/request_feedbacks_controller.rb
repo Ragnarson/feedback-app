@@ -47,7 +47,6 @@ class RequestFeedbacksController < ApplicationController
   end
 
   def fetch_current_user_feedback_request
-    # catch error + alert z ridrectem
     @current_user_feedback_request = current_user.request_feedbacks.find(params[:id])
   end
 

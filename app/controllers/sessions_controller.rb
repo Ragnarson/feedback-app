@@ -23,15 +23,7 @@ class SessionsController < ApplicationController
     @auth ||= request.env["omniauth.auth"]
   end
 
-  def domain
-    @domain ||= auth[:extra][:raw_info][:hd]
-  end
-
   def email
     @email ||= auth[:extra][:raw_info][:email]
-  end
-
-  def blacklisted?(email)
-    BlacklistedUser.exists?(email: email)
   end
 end

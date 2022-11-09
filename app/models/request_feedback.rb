@@ -5,7 +5,6 @@ class RequestFeedback < ApplicationRecord
 
   AVAILABLE_TYPES = ["Note", "Group meeting", "1-on-1"].freeze
 
-  # enum :feedback_type, { note: 0, group: 1, declined: 2 }, suffix: true
   enum :status, { pending: 0, accepted: 1, declined: 2 }, suffix: true
 
   def self.feedback_types

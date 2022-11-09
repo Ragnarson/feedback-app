@@ -11,11 +11,10 @@ class UsersController < ApplicationController
   def index
     render(
       locals: {
-        users: User.where.not(id: current_user&.id).all
+        users: User.where.not(id: current_user&.id).all.order(name: :asc)
       }
     )
   end
-
 
   private
 
