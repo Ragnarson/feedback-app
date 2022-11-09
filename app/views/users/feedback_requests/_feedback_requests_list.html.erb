@@ -25,7 +25,7 @@
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= request.feedback_type %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm <%= status_style(request.status) %>"><%= request.status %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">
-                  <% if current_user == User.find(params[:id]) %>
+                  <% if current_user == @user %>
                     <% if request.pending_status? || request.declined_status? %>
                       <%= link_to "Accept",
                         accept_request_feedback_path(request),

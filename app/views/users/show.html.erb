@@ -1,6 +1,4 @@
 <%= render "users/feedback_requests/feedback_requests_list", request_feedbacks: @user.feedback_requests %>
 <%= render "users/feedback_offers/recievied_feedback_offers", feedback_offers: @user.recieved_offers %>
-<% if current_user == User.find(params[:id]) %>
-  <%= render "users/current_user_feedback_offers", current_user_feedback_offers: @user.give_feedbacks %>
-  <%= render "users/current_user_feedback_requests_list", current_user_feedback_requests: @user.request_feedbacks %>
-<% end %>
+<%= render "users/user_feedback_offers", current_user_feedback_offers: @user.give_feedbacks %>
+<%= render "users/user_feedback_requests_list", current_user_feedback_requests: @user.request_feedbacks %>
