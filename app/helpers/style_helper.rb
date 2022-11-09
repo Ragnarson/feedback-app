@@ -2,10 +2,10 @@ module StyleHelper
   def status_style(status)
     if status == "pending"
       "text-gray-500"
-    elsif status == "accepted"
-      "text-green-500"
+    elsif status == "declined"
+      "text-red-500"
     else
-      "text-sm text-red-500"
+      "text-green-500"
     end
   end
 end

@@ -1,5 +1,5 @@
 class RequestFeedbacksController < ApplicationController
-  before_action :fetch_feedback_request, only: [:accept, :decline]
+  before_action :fetch_feedback_request, only: [:accept, :decline, :happened]
   before_action :fetch_current_user_feedback_request, only: [:destroy]
 
   def create
@@ -32,6 +32,11 @@ class RequestFeedbacksController < ApplicationController
 
   def decline
     @request_feedback.update(status: :declined)
+    redirect_back fallback_location: root_path
+  end
+
+  def happened
+    @request_feedback.update(status: :happened)
     redirect_back fallback_location: root_path
   end
 

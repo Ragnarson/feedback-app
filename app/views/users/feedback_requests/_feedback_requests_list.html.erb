@@ -26,17 +26,31 @@
                   <td class="whitespace-nowrap px-3 py-4 text-sm <%= status_style(request.status) %>"><%= request.status %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">
                   <% if current_user == @user %>
-                    <% if request.pending_status? || request.declined_status? %>
+                    <% if (request.pending_status? || request.declined_status?) && !request.happened_status? %>
                       <%= link_to "Accept",
                         accept_request_feedback_path(request),
                         class: "mb-2 inline-flex items-center rounded border border-transparent bg-green-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2",
                         data: {"turbo": true, "turbo-method": :patch }
                       %>
                     <% end %>
-                    <% if request.pending_status? || request.accepted_status? %>
+                    <% if (request.pending_status? || request.accepted_status?) && !request.happened_status? %>
                       <%= link_to "Decline",
                         decline_request_feedback_path(request),
                         class: "mb-2 inline-flex items-center rounded border border-transparent bg-red-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2",
+                        data: {"turbo": true, "turbo-method": :patch }
+                      %>
+                    <% end %>
+                    <% if request.accepted_status? %>
+                      <%= link_to "Happened",
+                        happened_request_feedback_path(request),
+                        class: "mb-2 inline-flex items-center rounded border border-transparent bg-green-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2",
+                        data: {"turbo": true, "turbo-method": :patch }
+                      %>
+                    <% end %>
+                    <% if request.happened_status? %>
+                      <%= link_to "Undo",
+                        accept_request_feedback_path(request),
+                        class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
                         data: {"turbo": true, "turbo-method": :patch }
                       %>
                     <% end %>

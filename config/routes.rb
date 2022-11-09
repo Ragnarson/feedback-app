@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     member do
       patch :accept
       patch :decline
+      patch :happened
     end
   end
 
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
     member do
       patch :accept
       patch :decline
+      patch :happened
     end
   end
 end
