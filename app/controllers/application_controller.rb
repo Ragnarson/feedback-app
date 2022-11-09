@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
-
   helper_method :current_user
 
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
   private
 
@@ -13,9 +12,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    unless current_user&.active?
-      # store_original_request_location
-      redirect_to "/"
+    unless current_user&.present?
+      redirect_to login_path
     end
   end
 end

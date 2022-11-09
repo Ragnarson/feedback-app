@@ -1,18 +1,11 @@
 class SessionsController < ApplicationController
-  # skip_before_action :authenticate_user!
+  skip_before_action :authenticate_user!
 
   def create
-    # return redirect_to root_path unless domain.present?
+    @user = User.find_or_create_from_auth(auth: auth)
 
-    # if blacklisted?(email)
-    #   redirect_to root_url, alert: "Authentication error: Email not whitelisted"
-    # else
-    #   agency = Agency.find_or_create_by!(domain: domain)
-      @user = User.find_or_create_from_auth(auth: auth)
-
-      cookies.permanent.signed[:user_id] = @user.id
-      redirect_to root_path, notice: "Signed in"
-    # end
+    cookies.permanent.signed[:user_id] = @user.id
+    redirect_to users_path, notice: "Signed in"
   end
 
   def destroy

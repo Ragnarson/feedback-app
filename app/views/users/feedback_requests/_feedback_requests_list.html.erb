@@ -6,40 +6,41 @@
           <table class="min-w-full divide-y divide-gray-300">
             <thead class="bg-gray-50">
               <tr>
-                <div class="sm:flex-auto">
-                  <h1 class="text-xl pl-4 text-left font-semibold text-gray-900 m-2">
-                    A list of Users who want to give <%= current_user == @user ? "you" : @user.name %> feedback
-                  </h1>
-                </div>
+              <div class="sm:flex-auto">
+                <h1 class="text-xl pl-4 text-left font-semibold text-gray-900 m-2">
+                  A list of Users who sent a request for <%= current_user == @user ? "your" : @user.name %> feedback
+                </h1>
+              </div>
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Type of feedback</th>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
                 <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Actions</th>
+                </th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
-              <% feedback_offers&.each do |feedback| %>
+              <% request_feedbacks&.each do |request| %>
                 <tr>
-                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= feedback.user.name %></td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= feedback.feedback_type %></td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= feedback.status %></td>
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= request.user.name %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= request.feedback_type %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= request.status %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">
                   <% if current_user == User.find(params[:id]) %>
-                    <% if feedback.pending_status? || feedback.declined_status? %>
+                    <% if request.pending_status? || request.declined_status? %>
                       <%= link_to "Accept",
-                        accept_give_feedback_path(feedback),
+                        accept_request_feedback_path(request),
                         class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
                         data: {"turbo": true, "turbo-method": :patch }
                       %>
-                    <% end %> 
-                    <% if feedback.pending_status? || feedback.accepted_status? %>
+                    <% end %>
+                    <% if request.pending_status? || request.accepted_status? %>
                       <%= link_to "Decline",
-                        decline_give_feedback_path(feedback),
+                        decline_request_feedback_path(request),
                         class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
                         data: {"turbo": true, "turbo-method": :patch }
                       %>
-                    <% end %>  
-                  <%end%>
+                    <% end %>
+                  <% end %>
                   </td>
                 </tr>
               <%end%>

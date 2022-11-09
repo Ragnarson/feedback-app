@@ -8,37 +8,29 @@
               <tr>
                 <div class="sm:flex-auto">
                   <h1 class="text-xl pl-4 text-left font-semibold text-gray-900 m-2">
-                    A list of Users who want to give <%= current_user == @user ? "you" : @user.name %> feedback
+                    A list of Users to whom you send that you can give them feedback. Check the current status
                   </h1>
-                </div>
+                </div>  
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Type of feedback</th>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
                 <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Actions</th>
+                </th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
-              <% feedback_offers&.each do |feedback| %>
+              <% current_user_feedback_offers&.each do |feedback| %>
                 <tr>
-                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= feedback.user.name %></td>
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= User.find_by(id: feedback.recipient).name %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= feedback.feedback_type %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= feedback.status %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">
                   <% if current_user == User.find(params[:id]) %>
-                    <% if feedback.pending_status? || feedback.declined_status? %>
-                      <%= link_to "Accept",
-                        accept_give_feedback_path(feedback),
-                        class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
-                        data: {"turbo": true, "turbo-method": :patch }
-                      %>
-                    <% end %> 
-                    <% if feedback.pending_status? || feedback.accepted_status? %>
-                      <%= link_to "Decline",
-                        decline_give_feedback_path(feedback),
-                        class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
-                        data: {"turbo": true, "turbo-method": :patch }
-                      %>
-                    <% end %>  
+                    <%= link_to "Undo",
+                      give_feedback_path(feedback),
+                      class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
+                      data: {"turbo": true, "turbo-method": :delete }
+                    %>
                   <%end%>
                   </td>
                 </tr>

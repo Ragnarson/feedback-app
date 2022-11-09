@@ -1,0 +1,29 @@
+<div id="flash-<%= index %>" class="<%= flash_container_classes(type) %> <%= flash_hidden(message) %>" data-controller="flash">
+  <div class="shrink-0">
+    <%= flash_svg(type) %>
+  </div>
+  <div class="ml-3">
+    <% if message.is_a? Hash %>
+      <p class="<%= flash_message_classes(type) %>" data-flash-target="message">
+        <%= message.with_indifferent_access[:message] %>
+      </p>
+      <ul class="<%= flash_message_details_classes(type) %>">
+        <% message.with_indifferent_access.fetch(:details, []).each do |detail_message| %>
+          <li class="text-sm my-1"><%= detail_message %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="<%= flash_message_classes(type) %>" data-flash-target="message">
+        <%= message %>
+      </p>
+    <% end %>
+  </div>
+  <div class="ml-auto pl-3">
+    <div class="-mx-1.5 -my-1.5">
+      <button type="button" class="<%= flash_exit_button_classes(type) %>" data-action="flash#close">
+        <span class="sr-only">Dismiss</span>
+        <%= render partial: "shared/svg/close", locals: {classes: "h-5 w-5"} %>
+      </button>
+    </div>
+  </div>
+</div>
