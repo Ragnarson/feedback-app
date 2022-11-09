@@ -8,11 +8,11 @@
               <tr>
                 <div class="sm:flex-auto">
                   <h1 class="text-xl pl-4 text-left font-semibold text-gray-900 m-2">
-                  <% if current_user == @user  %>
-                    A list of people you would like to receive feedback from. Check the current status
-                  <% else %>
-                    A list of people <%= @user.name %> would like to receive feedback from
-                  <% end %>
+                    <% if current_user == @user  %>
+                      Osoby od których chciałbyś dostać feedback
+                    <% else %>
+                      Osoby od których <%= @user.name %> chciałby dostać feedback
+                    <% end %>
                   </h1>
                 </div>
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Recipient's name</th>

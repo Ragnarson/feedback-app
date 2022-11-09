@@ -8,7 +8,11 @@
               <tr>
               <div class="sm:flex-auto">
                 <h1 class="text-xl pl-4 text-left font-semibold text-gray-900 m-2">
-                  A list of Users who sent a request for <%= current_user == @user ? "your" : @user.name %> feedback
+                  <% if current_user == @user %>
+                    Osoby chcące od Ciebie feedbacku
+                  <% else %>
+                    Osoby chcące feedback od <%= @user.name %>
+                  <% end %>
                 </h1>
               </div>
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Sender's name</th>
