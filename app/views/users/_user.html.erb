@@ -1,9 +1,9 @@
 <tr data-controller="modal">
-  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%=link_to user.name, user_path(user) %></td>
+  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 hover:underline sm:pl-6"><%=link_to user.name, user_path(user) %></td>
   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= user.email %></td>
   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">
     <% unless RequestFeedback.find_by(user_id: user.id, recipient: current_user.id, status: :accepted).present? || RequestFeedback.find_by(user_id: current_user.id, recipient: user.id, status: :accepted).present? %>
-      <%= link_to_modal "Give Feedback", dom_id(user, :offer_modal), GiveFeedback, user.id, class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+      <%= link_to_modal "Offer Feedback", dom_id(user, :offer_modal), GiveFeedback, user.id, class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
     <% end %>
     <% unless GiveFeedback.find_by(user_id: user.id, recipient: current_user.id, status: :accepted).present? || GiveFeedback.find_by(user_id: current_user.id, recipient: user.id, status: :accepted).present? %>
       <%= link_to_modal "Request Feedback", dom_id(user, :request_modal), RequestFeedback, user.id, class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"  %>
@@ -16,11 +16,3 @@
   <%= render "users/feedback_requests/request_feedback_modal", user: user  %>
   <%= render "users/feedback_offers/offer_feedback_modal", user: user %>
 </tr>
-
-<%# FeedbackOffer <- GiveFeedback %>
-<%# FeedbackRequest %>
-
-<%# user (czyli ten co wyslal) -> sender %>
-
-
-<%# feedback_type na enuma %>

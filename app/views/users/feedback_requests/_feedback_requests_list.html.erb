@@ -11,7 +11,7 @@
                   A list of Users who sent a request for <%= current_user == @user ? "your" : @user.name %> feedback
                 </h1>
               </div>
-                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Sender's name</th>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Type of feedback</th>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
                 <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Actions</th>
@@ -23,20 +23,20 @@
                 <tr>
                   <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= request.user.name %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= request.feedback_type %></td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= request.status %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm <%= status_style(request.status) %>"><%= request.status %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">
                   <% if current_user == User.find(params[:id]) %>
                     <% if request.pending_status? || request.declined_status? %>
                       <%= link_to "Accept",
                         accept_request_feedback_path(request),
-                        class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
+                        class: "mb-2 inline-flex items-center rounded border border-transparent bg-green-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2",
                         data: {"turbo": true, "turbo-method": :patch }
                       %>
                     <% end %>
                     <% if request.pending_status? || request.accepted_status? %>
                       <%= link_to "Decline",
                         decline_request_feedback_path(request),
-                        class: "mb-2 inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
+                        class: "mb-2 inline-flex items-center rounded border border-transparent bg-red-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2",
                         data: {"turbo": true, "turbo-method": :patch }
                       %>
                     <% end %>

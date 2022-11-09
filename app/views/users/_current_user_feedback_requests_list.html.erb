@@ -11,7 +11,7 @@
                     A list of people you would like to receive feedback from. Check the current status
                   </h1>
                 </div>
-                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Recipient's name</th>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Type of feedback</th>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 text-center">Actions</th>
@@ -23,7 +23,7 @@
                 <tr>
                   <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= User.find_by(id: request.recipient).name %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= request.feedback_type %></td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= request.status %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm <%= status_style(request.status) %>"><%= request.status %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">
                     <% if current_user == User.find(params[:id]) %>
                       <%= link_to "Undo",
