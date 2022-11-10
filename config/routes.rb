@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "/logout", to: "sessions#destroy", as: :logout
   get "/login", to: "users#login", as: :login
   post "/both_creation", to: "request_feedbacks#both_creation", as: :both_creation
+  get "/summary", to: "users#summary", as: :summary
   
   root 'users#index'
   resources :users

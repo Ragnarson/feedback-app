@@ -16,6 +16,10 @@ class UsersController < ApplicationController
     )
   end
 
+  def summary
+    @users = User.all
+  end
+
   private
 
   def fetch_user

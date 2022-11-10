@@ -1,5 +1,5 @@
 <tr data-controller="modal">
-  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 hover:underline sm:pl-6"><%=link_to user.name, user_path(user) %></td>
+  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 hover:underline sm:pl-6"><%= link_to user.name, user_path(user) %></td>
   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= user.email %></td>
   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">
     <% unless RequestFeedback.where(user_id: user.id, recipient: current_user.id, status: :accepted).any? || RequestFeedback.where(user_id: user.id, recipient: current_user.id, status: :pending).any? %>

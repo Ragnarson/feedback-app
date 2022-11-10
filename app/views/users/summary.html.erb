@@ -1,0 +1,60 @@
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="mt-8 flex flex-col">
+    <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+          <table class="table-fixed w-full divide-y divide-gray-300">
+            <thead class="bg-gray-50">
+              <tr>
+                <div class="sm:flex-auto">
+                  <h1 class="text-xl pl-4 text-left font-semibold text-gray-900 m-2">
+                    Podsumowanie
+                  </h1>
+                </div>  
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">User</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Daje feedback</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Dostaje feedback</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 text-center">Daje / Dostaje</th>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+              <% @users&.order(name: :asc).each do |user| %>
+                <tr>
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 hover:underline"><%= link_to user.name, user_path(user) %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <% user_feedbacks(user.feedback_requests.where(status: :accepted).or(user.feedback_requests.where(status: :happened)), 
+                    user.give_feedbacks.where(status: :accepted).or(user.give_feedbacks.where(status: :happened))).each do |offer| %>
+                      <table>
+                        <tr>
+                          <td>
+                            <%= offer["name"] + "(#{offer["feedback_type"]})" %>
+                          </td>
+                        </tr>
+                      </table>
+                    <% end %>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <% user_feedbacks(user.recieved_offers.where(status: :accepted).or(user.recieved_offers.where(status: :happened)),
+                    user.request_feedbacks.where(status: :accepted).or(user.request_feedbacks.where(status: :happened))).each do |offer| %>
+                      <table>
+                        <tr>
+                          <td>
+                            <%= offer["name"] + "(#{offer["feedback_type"]})" %>
+                          </td>
+                        </tr>
+                      </table>
+                    <% end %>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">
+                  <%= (user.feedback_requests.where(status: :accepted).or(user.feedback_requests.where(status: :happened)).any?) || user.give_feedbacks.where(status: :accepted).or(user.give_feedbacks.where(status: :happened)).any? ? user.feedback_requests.where(status: :accepted).or(user.feedback_requests.where(status: :happened)).count + user.give_feedbacks.where(status: :accepted).or(user.give_feedbacks.where(status: :happened)).count : "0" %> /
+                  <%= (user.recieved_offers.where(status: :accepted).or(user.recieved_offers.where(status: :happened)).any? || user.request_feedbacks.where(status: :accepted).or(user.request_feedbacks.where(status: :happened)).any?) ? user.recieved_offers.where(status: :accepted).or(user.recieved_offers.where(status: :happened)).count + user.request_feedbacks.where(status: :accepted).or(user.request_feedbacks.where(status: :happened)).count : "0" %></td>
+                </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
