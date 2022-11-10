@@ -20,7 +20,7 @@ class RequestFeedbacksController < ApplicationController
     if request_feedback.save && give_feedback.save
       redirect_to root_path, notice: "Your request and offer feedback successfully has been sent"
     else
-      flash[:alert] = request_feedback.errors.full_messages.to_sentence + give_feedback.errors.full_messages.to_sentence
+      flash[:alert] = request_feedback.errors.full_messages.to_sentence
       redirect_back fallback_location: root_path
     end
   end
