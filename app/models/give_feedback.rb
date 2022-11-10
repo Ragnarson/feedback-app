@@ -18,7 +18,7 @@ class GiveFeedback < ApplicationRecord
   private
 
   def request_exist
-    if RequestFeedback.find_by(recipient: self.user.id).present?
+    if RequestFeedback.find_by(recipient: self.user.id, feedback_type: self.feedback_type).present?
       self.errors.add(:you_have_already_received_request_for_feedback, "from #{User.find_by(id: self.recipient).name}")
     end
   end
