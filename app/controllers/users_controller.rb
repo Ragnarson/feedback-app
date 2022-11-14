@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def summary
-    @users = User.all
+    @users = User.all.order(name: :asc)
   end
 
   private

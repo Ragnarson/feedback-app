@@ -1,4 +1,4 @@
-<%= simple_form_for RequestFeedback.new, remote: false, defaults: {wrapper_html: {class: "mb-4"}}  do |f| %>
+<%= simple_form_for RequestFeedback.new, remote: false, defaults: {required: false, wrapper_html: {class: "mb-4"}}  do |f| %>
   <label class="date text-gray-800 leading-5 font-medium mb-4">Request Feedback from <%= user.name %></label>
   <%= f.input :feedback_type, collection: RequestFeedback.feedback_types, prompt: "Select type", input_html: { class: "ml-4 mt-4" } %>
   <%= f.hidden_field :recipient, value: user.id %>
