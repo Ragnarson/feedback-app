@@ -18,8 +18,8 @@
                 <tr>
                   <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 hover:underline"><%= link_to user.name, user_path(user) %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    <% user_feedbacks(user.feedback_requests.where(status: :accepted).or(user.feedback_requests.where(status: :happened)), 
-                    user.give_feedbacks.where(status: :accepted).or(user.give_feedbacks.where(status: :happened))).each do |offer| %>
+                    <% user_feedbacks(user.feedback_requests_status_accepted_or_happened, 
+                    user.give_feedbacks_status_accepted_or_happened).each do |offer| %>
                       <table>
                         <tr>
                           <td>
@@ -30,8 +30,8 @@
                     <% end %>
                   </td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    <% user_feedbacks(user.recieved_offers.where(status: :accepted).or(user.recieved_offers.where(status: :happened)),
-                    user.request_feedbacks.where(status: :accepted).or(user.request_feedbacks.where(status: :happened))).each do |offer| %>
+                    <% user_feedbacks(user.recieved_offers_status_accepted_or_happened,
+                    user.request_feedbacks_status_accepted_or_happened).each do |offer| %>
                       <table>
                         <tr>
                           <td>
@@ -42,8 +42,9 @@
                     <% end %>
                   </td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">
-                  <%= (user.feedback_requests.where(status: :accepted).or(user.feedback_requests.where(status: :happened)).any?) || user.give_feedbacks.where(status: :accepted).or(user.give_feedbacks.where(status: :happened)).any? ? user.feedback_requests.where(status: :accepted).or(user.feedback_requests.where(status: :happened)).count + user.give_feedbacks.where(status: :accepted).or(user.give_feedbacks.where(status: :happened)).count : "0" %> /
-                  <%= (user.recieved_offers.where(status: :accepted).or(user.recieved_offers.where(status: :happened)).any? || user.request_feedbacks.where(status: :accepted).or(user.request_feedbacks.where(status: :happened)).any?) ? user.recieved_offers.where(status: :accepted).or(user.recieved_offers.where(status: :happened)).count + user.request_feedbacks.where(status: :accepted).or(user.request_feedbacks.where(status: :happened)).count : "0" %></td>
+                    <%= feedback_count(user.give_feedbacks_status_accepted_or_happened, user.feedback_requests_status_accepted_or_happened) %> /
+                    <%= feedback_count(user.recieved_offers_status_accepted_or_happened, user.request_feedbacks_status_accepted_or_happened) %>
+                  </td>
                 </tr>
               <%end%>
             </tbody>

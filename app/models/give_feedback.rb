@@ -1,15 +1,14 @@
 class GiveFeedback < ApplicationRecord
   belongs_to :user
-
+  
   validates :feedback_type, presence: true
   validate :request_exist
 
-  AVAILABLE_TYPES = ["Note", "Group meeting", "1-on-1"].freeze
+  scope :status_accepted_or_happened, -> { where(status: :accepted).or(where(status: :happened)) }
 
   enum :status, { pending: 0, accepted: 1, declined: 2, happened: 3 }, suffix: true
 
-  scope :status_accepted_or_happened, -> { where(status: :accepted).or(where(status: :happened)) }
-  scope :status_pending, -> { where(status: :pending) }
+  AVAILABLE_TYPES = ["Note", "Group meeting", "1-on-1"].freeze
 
   def self.feedback_types
     AVAILABLE_TYPES
