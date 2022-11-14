@@ -4,6 +4,8 @@ module StyleHelper
       "text-gray-500"
     elsif status == "declined"
       "text-red-500"
+    elsif status == "accepted"
+      "text-yellow-500"
     else
       "text-green-500"
     end

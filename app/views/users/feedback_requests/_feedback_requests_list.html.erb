@@ -33,7 +33,7 @@
                     <% if (request.pending_status? || request.declined_status?) && !request.happened_status? %>
                       <%= link_to "Accept",
                         accept_request_feedback_path(request),
-                        class: "mb-2 inline-flex items-center rounded border border-transparent bg-green-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2",
+                        class: "mb-2 inline-flex items-center rounded border border-transparent bg-yellow-500 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2",
                         data: {"turbo": true, "turbo-method": :patch }
                       %>
                     <% end %>
