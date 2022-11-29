@@ -16,4 +16,10 @@ class ApplicationController < ActionController::Base
       redirect_to login_path
     end
   end
+
+  def authenticate_admin!
+    unless current_user&.is_admin?
+      redirect_to root_path, alert: "You are not authorized"
+    end
+  end
 end
