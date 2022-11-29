@@ -5,6 +5,7 @@ class RequestFeedback < ApplicationRecord
   validate :offer_exist
 
   scope :status_accepted_or_happened, -> { where(status: :accepted).or(where(status: :happened)) }
+  scope :status_happened, -> { (where(status: :happened)) }
 
   enum :status, { pending: 0, accepted: 1, declined: 2, happened: 3 }, suffix: true
   

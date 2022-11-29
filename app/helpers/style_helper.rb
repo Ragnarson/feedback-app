@@ -10,4 +10,12 @@ module StyleHelper
       "text-green-500"
     end
   end
+
+  def admin_object_status(object)
+    if object["status"] == "happened"
+      "text-green-500"
+    else
+      "text-gray-500"
+    end
+  end
 end

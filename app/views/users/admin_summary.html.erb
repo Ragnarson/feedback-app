@@ -1,0 +1,56 @@
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="mt-8 flex flex-col">
+    <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+          <table class="table-fixed w-full divide-y divide-gray-300">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">User</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Daje feedback</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Dostaje feedback</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 text-center">Daje(happened) / Dostaje(happened)</th>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+              <% @users&.each do |user| %>
+                <tr>
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 hover:underline"><%= link_to user.name, user_path(user) %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <% user_feedbacks(user.feedback_requests_status_accepted_or_happened, 
+                    user.give_feedbacks_status_accepted_or_happened).each do |offer| %>
+                      <table>
+                        <tr>
+                          <td class="<%= admin_object_status(offer) %>">
+                            <%= object_details(offer) %>
+                          </td>
+                        </tr>
+                      </table>
+                    <% end %>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <% user_feedbacks(user.recieved_offers_status_accepted_or_happened,
+                    user.request_feedbacks_status_accepted_or_happened).each do |offer| %>
+                      <table>
+                        <tr>
+                          <td class="<%= admin_object_status(offer) %>">
+                            <%= object_details(offer) %>
+                          </td>
+                        </tr>
+                      </table>
+                    <% end %>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-center">
+                    <%= feedback_count(user.give_feedbacks_status_accepted_or_happened, user.feedback_requests_status_accepted_or_happened) %><%= "(#{feedback_count(user.give_feedbacks_status_happened, user.feedback_requests_status_happened)})" %> /
+                    <%= feedback_count(user.recieved_offers_status_accepted_or_happened, user.request_feedbacks_status_accepted_or_happened)%><%= "(#{feedback_count(user.recieved_offers_status_happened, user.request_feedbacks_status_happened)})" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

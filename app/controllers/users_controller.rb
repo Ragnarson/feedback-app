@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:login]
+  before_action :authenticate_admin!, only: :admin_summary
   before_action :fetch_user, only: [:show]
 
   def login
@@ -17,6 +18,10 @@ class UsersController < ApplicationController
   end
 
   def summary
+    @users = User.all.order(name: :asc)
+  end
+
+  def admin_summary
     @users = User.all.order(name: :asc)
   end
 

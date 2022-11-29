@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get "/login", to: "users#login", as: :login
   post "/both_creation", to: "request_feedbacks#both_creation", as: :both_creation
   get "/summary", to: "users#summary", as: :summary
+  get "/admin_summary", to: "users#admin_summary", as: :admin_summary
+
   
   root 'users#index'
   resources :users
