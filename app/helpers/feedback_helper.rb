@@ -35,6 +35,6 @@ module FeedbackHelper
   end
 
   def object_details(object)
-   [object["name"], "(#{object["feedback_type"]})", " - ", object["status"]].join
+   [object["name"], "(#{object["feedback_type"]})"].join
   end
 end
