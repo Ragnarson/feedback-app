@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate_user!
+  skip_before_action :authenticate_user!, :authenticate_admin!
 
   def create
     @user = User.find_or_create_from_auth(auth: auth)
