@@ -1,6 +1,6 @@
 class GiveFeedbacksController < ApplicationController
   before_action :fetch_feedback_offer, only: [:accept, :decline, :happened]
-  before_action :fetch_current_user_feedback_offer, only: [:destroy]
+  before_action :fetch_current_user_feedback_offer, only: [:destroy, :user_offer_happened]
 
   def create
     give_feedback = current_user.give_feedbacks.new(give_feedback_params)
@@ -25,6 +25,11 @@ class GiveFeedbacksController < ApplicationController
 
   def happened
     @feedback_offer.update(status: :happened)
+    redirect_back fallback_location: root_path
+  end
+
+  def user_offer_happened
+    @current_user_feedback_offer.update(status: :happened)
     redirect_back fallback_location: root_path
   end
 

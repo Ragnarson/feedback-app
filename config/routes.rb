@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       patch :accept
       patch :decline
       patch :happened
+      patch :user_offer_happened
     end
   end
 
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
       patch :accept
       patch :decline
       patch :happened
+      patch :user_request_happened
     end
   end
 end
